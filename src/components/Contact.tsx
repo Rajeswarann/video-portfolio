@@ -72,20 +72,20 @@ const Contact: React.FC = () => {
     {
       icon: Mail,
       label: 'Email',
-      value: 'hello@videoeditor.com',
-      href: 'mailto:hello@videoeditor.com',
+      value: 'rajeswaran.d.n@gmail.com',
+      href: 'rajeswaran.d.n@gmail.com',
     },
     {
       icon: Phone,
       label: 'Phone',
-      value: '+1 (555) 123-4567',
-      href: 'tel:+15551234567',
+      value: '73584 60382',
+      href: '73584 60382',
     },
     {
       icon: MapPin,
       label: 'Location',
-      value: 'New York, NY',
-      href: '#',
+      value: 'Padi , Chennai - 600050 , India'
+      
     },
   ];
 

@@ -68,8 +68,8 @@ const About: React.FC = () => {
               Crafting Visual Stories
             </h3>
             <p className="text-gray-300 text-lg leading-relaxed">
-              I'm a professional video editor with over 5 years of experience in creating compelling visual narratives. 
-              My expertise spans across motion graphics, cinematic editing, podcast production, and social media content creation.
+              I’m a passionate video editor with 1 year and 9 months of hands-on experience crafting 
+              engaging visual stories. My work spans motion graphics, cinematic editing, podcast production, and social media content creation.
             </p>
             <p className="text-gray-300 text-lg leading-relaxed">
               I believe every project tells a unique story, and my role is to bring that story to life through innovative 
