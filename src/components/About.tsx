@@ -1,28 +1,30 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Video, Palette, Headphones, Camera, Award, Clock } from 'lucide-react';
+import { Video, Palette, Headphones, Award, Clock } from 'lucide-react';
 
 const About: React.FC = () => {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
+
+  const getAssetPath = (path: string) => `${import.meta.env.BASE_URL}${path}`;
 
   const skills = [
     { name: 'Motion Graphics', percentage: 95, icon: Palette, color: 'from-cyan-400 to-blue-500' },
     { name: 'Video Editing', percentage: 98, icon: Video, color: 'from-purple-400 to-pink-500' },
     { name: 'Podcast Editing', percentage: 90, icon: Headphones, color: 'from-green-400 to-teal-500' },
-    { name: 'Cinematic Editing', percentage: 92, icon: Camera, color: 'from-orange-400 to-red-500' },
+    // { name: 'Cinematic Editing', percentage: 92, icon: Camera, color: 'from-orange-400 to-red-500' },
   ];
 
   const stats = [
-    { number: '500+', label: 'Projects Completed', icon: Award },
-    { number: '5+', label: 'Years Experience', icon: Clock },
+    { number: '900+', label: 'Projects Completed', icon: Award },
+    { number: '2+', label: 'Years Experience', icon: Clock },
     { number: '50+', label: 'Happy Clients', icon: Video },
   ];
 
   return (
     <section id="about" className="py-20 bg-gray-900 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-gray-800/50 to-gray-900"></div>
-      
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           ref={ref}
@@ -50,9 +52,13 @@ const About: React.FC = () => {
             className="space-y-6"
           >
             <div className="relative">
-              <div className="w-80 h-80 mx-auto lg:mx-0 rounded-full bg-gradient-to-br from-cyan-400/20 to-purple-500/20 backdrop-blur-sm border border-cyan-400/20 flex items-center justify-center">
-                <div className="w-72 h-72 rounded-full bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
-                  <Video size={120} className="text-cyan-400" />
+              <div className="w-80 h-80 mx-auto lg:mx-0 rounded-full bg-gradient-to-br from-cyan-400/20 to-purple-500/20 backdrop-blur-sm border border-cyan-400/20 flex items-center justify-center p-2">
+                <div className="w-full h-full rounded-full overflow-hidden border-4 border-gray-900/50">
+                  <img
+                    src={getAssetPath("assets/my-profile/me.jpg")}
+                    alt="Profile"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
               </div>
             </div>
@@ -68,11 +74,11 @@ const About: React.FC = () => {
               Crafting Visual Stories
             </h3>
             <p className="text-gray-300 text-lg leading-relaxed">
-              I’m a passionate video editor with 1 year and 9 months of hands-on experience crafting 
+              I’m a passionate video editor with 1 year and 9 months of hands-on experience crafting
               engaging visual stories. My work spans motion graphics, cinematic editing, podcast production, and social media content creation.
             </p>
             <p className="text-gray-300 text-lg leading-relaxed">
-              I believe every project tells a unique story, and my role is to bring that story to life through innovative 
+              I believe every project tells a unique story, and my role is to bring that story to life through innovative
               editing techniques, stunning visual effects, and seamless storytelling.
             </p>
 
@@ -110,7 +116,7 @@ const About: React.FC = () => {
           <h3 className="text-3xl font-bold text-center text-white mb-12">
             Technical Skills
           </h3>
-          
+
           <div className="grid md:grid-cols-2 gap-8">
             {skills.map((skill, index) => {
               const Icon = skill.icon;
@@ -131,7 +137,7 @@ const About: React.FC = () => {
                       <p className="text-gray-400">{skill.percentage}% Proficiency</p>
                     </div>
                   </div>
-                  
+
                   <div className="w-full bg-gray-700 rounded-full h-2">
                     <motion.div
                       className={`h-2 bg-gradient-to-r ${skill.color} rounded-full`}

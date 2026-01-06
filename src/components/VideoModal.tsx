@@ -92,22 +92,33 @@ const VideoModal: React.FC<VideoModalProps> = ({ video, isOpen, onClose }) => {
 
             {/* Video Player */}
             <div className="relative aspect-video bg-black">
-              <video
-                className="w-full h-full"
-                controls
-                autoPlay
-                poster={video.thumbnail}
-              >
-                <source src={video.videoUrl} type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
+              {video.videoUrl.includes('youtube.com') || video.videoUrl.includes('youtu.be') ? (
+                <iframe
+                  className="w-full h-full"
+                  src={`https://www.youtube.com/embed/${video.videoUrl.includes('v=') ? video.videoUrl.split('v=')[1].split('&')[0] : video.videoUrl.split('/').pop()}`}
+                  title={video.title}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              ) : (
+                <video
+                  className="w-full h-full"
+                  controls
+                  autoPlay
+                  poster={video.thumbnail}
+                >
+                  <source src={video.videoUrl} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              )}
             </div>
 
             {/* Description */}
             <div className="p-6">
               <h3 className="text-lg font-semibold text-white mb-3">Description</h3>
               <p className="text-gray-300 leading-relaxed mb-6">{video.description}</p>
-              
+
               <div className="flex items-center justify-between">
                 <div className="flex items-center text-cyan-400">
                   <ExternalLink size={16} className="mr-2" />

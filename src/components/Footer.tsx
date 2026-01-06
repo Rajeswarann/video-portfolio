@@ -29,7 +29,7 @@ const Footer: React.FC = () => {
           >
             <span>© 2024 Made with</span>
             <Heart size={16} className="text-red-400 mx-1 animate-pulse" />
-            <span>by VideoEditor</span>
+            <span>by Rajeswaran.D.N</span>
           </motion.div>
 
           {/* Back to Top */}

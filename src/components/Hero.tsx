@@ -7,6 +7,44 @@ interface HeroProps {
 }
 
 const Hero: React.FC<HeroProps> = ({ setActiveSection }) => {
+  const [text, setText] = React.useState('');
+  const [isDeleting, setIsDeleting] = React.useState(false);
+  const [loopNum, setLoopNum] = React.useState(0);
+  const [typingSpeed, setTypingSpeed] = React.useState(150);
+
+  const fullText = "RAJESWARAN .D.N";
+
+  React.useEffect(() => {
+    const handleType = () => {
+      const i = loopNum % 1; // Only 1 phrase to loop effectively, or could be array
+      // But user asked for specific text, let's just type it out and maybe pause or retype?
+      // "running letter like automatically" usually implies typing effect.
+      // Let's type "RAJESWARAN .D.N" then "Video Editor" or just the whole line.
+      // Let's try: Type "RAJESWARAN .D.N", pause, then "Video Editor" appended?
+      // Or just type the whole string "RAJESWARAN .D.N Video Editor" and loop?
+      // Let's type the whole string.
+
+      const currentText = fullText;
+
+      setText(isDeleting
+        ? currentText.substring(0, text.length - 1)
+        : currentText.substring(0, text.length + 1)
+      );
+
+      setTypingSpeed(isDeleting ? 30 : 150);
+
+      if (!isDeleting && text === currentText) {
+        setTimeout(() => setIsDeleting(true), 2000);
+      } else if (isDeleting && text === '') {
+        setIsDeleting(false);
+        setLoopNum(loopNum + 1);
+      }
+    };
+
+    const timer = setTimeout(handleType, typingSpeed);
+    return () => clearTimeout(timer);
+  }, [text, isDeleting, loopNum, typingSpeed]);
+
   const scrollToPortfolio = () => {
     const element = document.getElementById('portfolio');
     if (element) {
@@ -52,12 +90,14 @@ const Hero: React.FC<HeroProps> = ({ setActiveSection }) => {
           transition={{ duration: 0.8 }}
           className="mb-6"
         >
-          <h1 className="text-5xl md:text-7xl font-bold mb-4">
-            <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-              Creative
-            </span>
-            <br />
-            <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
+          <h1 className="text-4xl md:text-6xl font-bold mb-4">
+            <div className="h-[80px] md:h-[100px] flex items-center justify-center">
+              <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
+                {text}
+                <span className="text-white animate-pulse">|</span>
+              </span>
+            </div>
+            <span className="block text-white mt-4">
               Video Editor
             </span>
           </h1>
@@ -71,7 +111,7 @@ const Hero: React.FC<HeroProps> = ({ setActiveSection }) => {
         >
           Bringing stories to life through{' '}
           <span className="text-cyan-400 font-semibold">motion graphics</span>,{' '}
-          <span className="text-purple-400 font-semibold">cinematic editing</span>, and{' '}
+          {/* <span className="text-purple-400 font-semibold">cinematic editing</span>, and{' '} */}
           <span className="text-cyan-400 font-semibold">creative storytelling</span>
         </motion.p>
 

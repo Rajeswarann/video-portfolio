@@ -52,24 +52,25 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, onPlayVideo }) => {
         <img
           src={video.thumbnail}
           alt={video.title}
-          className={`w-full h-full object-cover transition-opacity duration-300 ${
-            isHovered && isLoaded ? 'opacity-0' : 'opacity-100'
-          }`}
+          className={`w-full h-full object-cover transition-opacity duration-300 ${isHovered && isLoaded ? 'opacity-0' : 'opacity-100'
+            }`}
         />
-        
+
         {/* Preview Video */}
-        <video
-          ref={videoRef}
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${
-            isHovered && isLoaded ? 'opacity-100' : 'opacity-0'
-          }`}
-          muted
-          loop
-          onLoadedData={() => setIsLoaded(true)}
-          preload="metadata"
-        >
-          <source src={video.videoUrl} type="video/mp4" />
-        </video>
+        {/* Preview Video - Only for local/MP4 videos */}
+        {!video.videoUrl.includes('youtube.com') && !video.videoUrl.includes('youtu.be') && (
+          <video
+            ref={videoRef}
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${isHovered && isLoaded ? 'opacity-100' : 'opacity-0'
+              }`}
+            muted
+            loop
+            onLoadedData={() => setIsLoaded(true)}
+            preload="metadata"
+          >
+            <source src={video.videoUrl} type="video/mp4" />
+          </video>
+        )}
 
         {/* Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -101,7 +102,7 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, onPlayVideo }) => {
         <p className="text-gray-400 text-sm mb-4 line-clamp-2">
           {video.description}
         </p>
-        
+
         <motion.button
           onClick={() => onPlayVideo(video)}
           className="flex items-center text-cyan-400 hover:text-cyan-300 transition-colors font-medium"

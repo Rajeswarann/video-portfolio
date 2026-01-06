@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, Instagram, Check } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Github, Linkedin, Check } from 'lucide-react';
 
 const Contact: React.FC = () => {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
@@ -42,18 +42,18 @@ const Contact: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateForm()) return;
 
     setIsSubmitting(true);
-    
+
     // Simulate form submission
     await new Promise(resolve => setTimeout(resolve, 2000));
-    
+
     setIsSubmitting(false);
     setIsSubmitted(true);
     setFormData({ name: '', email: '', subject: '', message: '' });
-    
+
     // Reset success message after 5 seconds
     setTimeout(() => setIsSubmitted(false), 5000);
   };
@@ -61,7 +61,7 @@ const Contact: React.FC = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-    
+
     // Clear error when user starts typing
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: '' }));
@@ -85,21 +85,19 @@ const Contact: React.FC = () => {
       icon: MapPin,
       label: 'Location',
       value: 'Padi , Chennai - 600050 , India'
-      
+
     },
   ];
 
   const socialLinks = [
-    { icon: Github, href: '#', label: 'GitHub' },
-    { icon: Linkedin, href: '#', label: 'LinkedIn' },
-    { icon: Twitter, href: '#', label: 'Twitter' },
-    { icon: Instagram, href: '#', label: 'Instagram' },
+    { icon: Github, href: 'https://github.com/Rajeswarann', label: 'GitHub' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/in/rajes-waran-509175248/', label: 'LinkedIn' },
   ];
 
   return (
     <section id="contact" className="py-20 bg-gray-900 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/10 via-transparent to-purple-900/10"></div>
-      
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           ref={ref}
@@ -127,7 +125,7 @@ const Contact: React.FC = () => {
             className="space-y-8"
           >
             <h3 className="text-2xl font-bold text-white mb-8">Let's Connect</h3>
-            
+
             {contactInfo.map((item, index) => {
               const Icon = item.icon;
               return (
@@ -163,6 +161,8 @@ const Contact: React.FC = () => {
                     <motion.a
                       key={social.label}
                       href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="w-12 h-12 bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-lg flex items-center justify-center hover:border-cyan-400/50 hover:bg-cyan-500/10 transition-colors"
                       initial={{ opacity: 0, y: 20 }}
                       animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -210,9 +210,8 @@ const Contact: React.FC = () => {
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      className={`w-full px-4 py-3 bg-gray-900/50 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition-colors ${
-                        errors.name ? 'border-red-500' : 'border-gray-600 focus:border-cyan-400'
-                      }`}
+                      className={`w-full px-4 py-3 bg-gray-900/50 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition-colors ${errors.name ? 'border-red-500' : 'border-gray-600 focus:border-cyan-400'
+                        }`}
                       placeholder="Your name"
                     />
                     {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
@@ -227,9 +226,8 @@ const Contact: React.FC = () => {
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      className={`w-full px-4 py-3 bg-gray-900/50 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition-colors ${
-                        errors.email ? 'border-red-500' : 'border-gray-600 focus:border-cyan-400'
-                      }`}
+                      className={`w-full px-4 py-3 bg-gray-900/50 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition-colors ${errors.email ? 'border-red-500' : 'border-gray-600 focus:border-cyan-400'
+                        }`}
                       placeholder="your@email.com"
                     />
                     {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
@@ -246,9 +244,8 @@ const Contact: React.FC = () => {
                     name="subject"
                     value={formData.subject}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 bg-gray-900/50 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition-colors ${
-                      errors.subject ? 'border-red-500' : 'border-gray-600 focus:border-cyan-400'
-                    }`}
+                    className={`w-full px-4 py-3 bg-gray-900/50 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition-colors ${errors.subject ? 'border-red-500' : 'border-gray-600 focus:border-cyan-400'
+                      }`}
                     placeholder="Project discussion"
                   />
                   {errors.subject && <p className="text-red-500 text-sm mt-1">{errors.subject}</p>}
@@ -264,9 +261,8 @@ const Contact: React.FC = () => {
                     value={formData.message}
                     onChange={handleChange}
                     rows={5}
-                    className={`w-full px-4 py-3 bg-gray-900/50 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition-colors resize-none ${
-                      errors.message ? 'border-red-500' : 'border-gray-600 focus:border-cyan-400'
-                    }`}
+                    className={`w-full px-4 py-3 bg-gray-900/50 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition-colors resize-none ${errors.message ? 'border-red-500' : 'border-gray-600 focus:border-cyan-400'
+                      }`}
                     placeholder="Tell me about your project..."
                   />
                   {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
