@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Video, Palette, Headphones, Award, Clock } from 'lucide-react';
+import { Video, Palette, Headphones, Award, Clock, Sparkles } from 'lucide-react';
 
 const About: React.FC = () => {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
@@ -12,7 +12,7 @@ const About: React.FC = () => {
     { name: 'Motion Graphics', percentage: 95, icon: Palette, color: 'from-cyan-400 to-blue-500' },
     { name: 'Video Editing', percentage: 98, icon: Video, color: 'from-purple-400 to-pink-500' },
     { name: 'Podcast Editing', percentage: 90, icon: Headphones, color: 'from-green-400 to-teal-500' },
-    // { name: 'Cinematic Editing', percentage: 92, icon: Camera, color: 'from-orange-400 to-red-500' },
+    { name: 'AI Video Generation', percentage: 90, icon: Sparkles, color: 'from-orange-400 to-red-500' },
   ];
 
   const stats = [
